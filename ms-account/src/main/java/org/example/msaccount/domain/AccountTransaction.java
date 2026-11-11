@@ -20,6 +20,7 @@ public class AccountTransaction {
 
     private double amount;
 
+    @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

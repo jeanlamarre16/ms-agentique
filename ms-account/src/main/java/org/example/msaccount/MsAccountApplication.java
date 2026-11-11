@@ -17,9 +17,16 @@ public class MsAccountApplication {
     @Bean
     CommandLineRunner commandLineRunner(AccountService accountService){
         return args -> {
-            accountService.saveNewAccount(6500, AccountType.CURRENT_ACCOUNT, "AJL", Long.valueOf(1));
-            accountService.saveNewAccount(300, AccountType.SAVING_ACCOUNT, "AJL", Long.valueOf(1));
-            accountService.saveNewAccount(8575, AccountType.CURRENT_ACCOUNT, "Toto", Long.valueOf(2));
+            accountService.createNewAccount(6500, AccountType.CURRENT_ACCOUNT, "AJL", Long.valueOf(1));
+            accountService.createNewAccount(300, AccountType.SAVING_ACCOUNT, "AJL", Long.valueOf(1));
+            accountService.createNewAccount(8575, AccountType.CURRENT_ACCOUNT, "Toto", Long.valueOf(2));
+
+            accountService.getAllAccounts().forEach(account -> {
+                    for (int i = 0; i < 5; i++ ) {
+                        accountService.creditAccount(account.getId(), Math.random() * 150);
+                        accountService.debitAccount(account.getId(), Math.random() * 154);
+                    }
+            });
         };
     }
 }
