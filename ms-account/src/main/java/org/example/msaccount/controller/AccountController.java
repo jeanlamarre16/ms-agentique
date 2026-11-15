@@ -4,15 +4,12 @@ import org.example.msaccount.domain.Account;
 import org.example.msaccount.domain.AccountTransaction;
 import org.example.msaccount.domain.AccountType;
 import org.example.msaccount.service.AccountService;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
-import static com.netflix.appinfo.AmazonInfo.MetaDataKey.accountId;
 
 @RestController
 public class AccountController {
@@ -48,4 +45,8 @@ public class AccountController {
         return accountService.getAccountById(accountId);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity exceptionHandler(Exception e) {
+        return ResponseEntity.internalServerError().body(Map.of("errorMessage", e.getMessage()));
+    }
 }
