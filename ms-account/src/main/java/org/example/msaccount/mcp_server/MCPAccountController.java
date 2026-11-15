@@ -1,4 +1,4 @@
-package org.example.msaccount.mcp;
+package org.example.msaccount.mcp_server;
 
 import org.example.msaccount.domain.Account;
 import org.example.msaccount.domain.AccountTransaction;
